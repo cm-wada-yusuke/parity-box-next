@@ -1,7 +1,7 @@
 // matter is a library that let's you parse the metadata in each markdown file.
 // the lib folder does not have an assigned name like the pages folder, so you can name it anything. It's usually convention to use lib or utils
 
-import fs from 'fs';
+import fs, { Dirent } from 'fs';
 import path from 'path';
 
 // Import 'gray-matter', library for parsing the metadata in each markdown file
@@ -29,18 +29,28 @@ const postsDirectory = path.join(process.cwd(), 'posts'); // process.cwd() retur
   ]
 */
 
-export function getSortedPostsGrayMatter() {
+export async function getSortedPostsGrayMatter() {
   // Get file names under /posts
-  const fileNames = fs.readdirSync(postsDirectory); // [ 'pre-rendering.md', 'ssg-ssr.md' ]
+  const dirents: Dirent[] = await fs.promises.readdir(postsDirectory, {
+    encoding: 'utf-8',
+    withFileTypes: true,
+    recursive: true,
+  }); // [ 'pre-rendering.md', 'ssg-ssr.md' ]
+
+  console.log(dirents);
+
+  const files = dirents.filter((dirent) => dirent.isFile());
 
   // Get the data from each file
-  const allPostsData = fileNames.map((filename) => {
+  const allPostsData = files.map((file) => {
+    console.log({ file });
     // Remove ".md" from file name to get id
-    const id = filename.replace(/\.md$/, ''); // id = 'pre-rendering', 'ssg-ssr'
+    const fullPath = path.join(file.path, file.name);
+    const relativePath = path.relative(postsDirectory, fullPath);
+    const slug = file.name.replace(/\.md$/, ''); // id = 'pre-rendering', 'ssg-ssr'
+    console.log({ slug });
 
     // Read markdown file as string
-    const fullPath = path.join(postsDirectory, filename);
-    // /Users/ef/Desktop/nextjs-blog/posts/pre-rendering.md
     const fileContents = fs.readFileSync(fullPath, 'utf8'); // .md string content
 
     // Use gray-matter to parse the post metadata section
@@ -48,14 +58,15 @@ export function getSortedPostsGrayMatter() {
 
     // Combine the data with the id
     return {
-      id,
-      ...(matterResult.data as { date: string; title: string }),
+      slug,
+      relativePath,
+      ...(matterResult.data as { published_at: string; title: string }),
     };
   });
 
   // Sort posts by date and return
   return allPostsData.sort((a, b) => {
-    if (a.date < b.date) {
+    if (a.published_at < b.published_at) {
       return 1;
     } else {
       return -1;
@@ -97,23 +108,25 @@ export function getAllPostIds() {
 
 // --------------------------------
 // GET THE DATA OF A SINGLE POST FROM THE ID
-export async function getPostData(id: string) {
-  const fullPath = path.join(postsDirectory, `${id}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+// export async function getPostData(id: string) {
+//   const fullPath = path.join(postsDirectory, `${id}.md`);
+//   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents);
+//   // Use gray-matter to parse the post metadata section
+//   const matterResult = matter(fileContents);
 
-  // Use remark to convert markdown into HTML string
-  const processedContent = await remark()
-    .use(html)
-    .process(matterResult.content);
-  const contentHtml = processedContent.toString();
+//   // Use remark to convert markdown into HTML string
+//   const processedContent = await remark()
+//     .use(html)
+//     .process(matterResult.content);
+//   const contentHtml = processedContent.toString();
 
-  // Combine the data with the id
-  return {
-    id,
-    contentHtml,
-    ...(matterResult.data as { date: string; title: string }),
-  };
-}
+//   // Combine the data with the id
+//   return {
+//     id,
+//     contentHtml,
+//     ...(matterResult.data as { date: string; title: string }),
+//   };
+// }
+
+// console.log(getSortedPostsGrayMatter());
