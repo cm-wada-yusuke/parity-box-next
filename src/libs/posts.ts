@@ -6,6 +6,8 @@ import path from 'path';
 
 // Import 'gray-matter', library for parsing the metadata in each markdown file
 import matter from 'gray-matter';
+import { PostMeta } from '@libs/types';
+import dayjs from 'dayjs';
 
 // --------------------------------
 // GET THE PATH OF THE POSTS FOLDER
@@ -29,7 +31,7 @@ const postsDirectory = path.join(process.cwd(), 'posts'); // process.cwd() retur
   ]
 */
 
-export async function getSortedPostsGrayMatter() {
+export async function getSortedPostsMeta(): Promise<PostMeta[]> {
   // Get file names under /posts
   const dirents: Dirent[] = await fs.promises.readdir(postsDirectory, {
     encoding: 'utf-8',
@@ -37,18 +39,15 @@ export async function getSortedPostsGrayMatter() {
     recursive: true,
   }); // [ 'pre-rendering.md', 'ssg-ssr.md' ]
 
-  console.log(dirents);
 
   const files = dirents.filter((dirent) => dirent.isFile());
 
   // Get the data from each file
   const allPostsData = files.map((file) => {
-    console.log({ file });
     // Remove ".md" from file name to get id
     const fullPath = path.join(file.path, file.name);
     const relativePath = path.relative(postsDirectory, fullPath);
     const slug = file.name.replace(/\.md$/, ''); // id = 'pre-rendering', 'ssg-ssr'
-    console.log({ slug });
 
     // Read markdown file as string
     const fileContents = fs.readFileSync(fullPath, 'utf8'); // .md string content
@@ -60,13 +59,14 @@ export async function getSortedPostsGrayMatter() {
     return {
       slug,
       relativePath,
-      ...(matterResult.data as { published_at: string; title: string }),
+      publishedAt: dayjs(matterResult.data.published_at),
+      title: matterResult.data.title,
     };
   });
 
   // Sort posts by date and return
   return allPostsData.sort((a, b) => {
-    if (a.published_at < b.published_at) {
+    if (a.publishedAt < b.publishedAt) {
       return 1;
     } else {
       return -1;

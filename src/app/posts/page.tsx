@@ -1,10 +1,6 @@
-import { Metadata } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { SharePostButton } from '@components/SharePostButton';
-import { getSortedPostsGrayMatter } from '@libs/posts';
+import { getSortedPostsMeta } from '@libs/posts';
 
 interface PostProps {
   params: {
@@ -44,12 +40,30 @@ interface PostProps {
 //   }));
 // }
 
-export default async function PostPage({ params }: PostProps) {
-  const posts = await getSortedPostsGrayMatter();
+export default async function PostPage({
+  params,
+  searchParams,
+}: {
+  params: PostProps;
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  console.log({ searchParams });
+  const currentPage =
+    typeof searchParams.page !== 'string'
+      ? 1
+      : parseInt(searchParams.page) || 1;
+  const perPage = 2; // 1ページあたりの記事数
 
+  const posts = await getSortedPostsMeta();
   if (!posts) {
     notFound();
   }
+
+  const paginatedPosts = posts.slice(
+    (currentPage - 1) * perPage,
+    currentPage * perPage
+  );
+  // const totalPages = Math.ceil(posts.length / perPage);
 
   return JSON.stringify(posts);
   // <article className="prose dark:prose-invert">
