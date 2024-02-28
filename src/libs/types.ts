@@ -6,3 +6,7 @@ export type PostMeta = {
   publishedAt: Dayjs;
   title: string;
 };
+
+export type PostDetail = PostMeta & {
+  html: string;
+};

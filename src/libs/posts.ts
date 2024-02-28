@@ -6,7 +6,7 @@ import path from 'path';
 
 // Import 'gray-matter', library for parsing the metadata in each markdown file
 import matter from 'gray-matter';
-import { PostMeta } from '@libs/types';
+import { Post, PostDetail, PostMeta } from '@libs/types';
 import dayjs from 'dayjs';
 
 // --------------------------------
@@ -38,7 +38,6 @@ export async function getSortedPostsMeta(): Promise<PostMeta[]> {
     withFileTypes: true,
     recursive: true,
   }); // [ 'pre-rendering.md', 'ssg-ssr.md' ]
-
 
   const files = dirents.filter((dirent) => dirent.isFile());
 
@@ -73,6 +72,8 @@ export async function getSortedPostsMeta(): Promise<PostMeta[]> {
     }
   });
 }
+
+export async function getPost(slug: string): Promise<PostDetail> {}
 
 // ------------------------------------------------
 // GET THE IDs OF ALL POSTS FOR THE DYNAMIC ROUTING

@@ -16,12 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
-        <main className='bg-white'>
-          <div className="bg-white container mx-auto px-4 max-w-3xl">
-            {children}
+      <body className={`${inter.className} bg-paper h-screen text-pen`}>
+        <header className="py-4 bg-paper border-b border-pen2">
+          <div className="container mx-auto max-w-4xl">
+            <h1 className="text-2xl font-bold"><a href="/">Parity Box</a></h1>
           </div>
-        </main>
+        </header>
+        <main className="container mx-auto min-w-24 max-w-3xl">{children}</main>
       </body>
     </html>
   );
