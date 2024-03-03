@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 
 import { getSortedPostsMeta } from '@libs/posts';
 
+// prism-themesを追加
+import 'prism-themes/themes/prism-vsc-dark-plus.min.css'
+
 interface PostProps {
   params: {
     slug: string[];
@@ -47,7 +50,6 @@ export default async function Home({
   params: PostProps;
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  console.log({ searchParams });
   const currentPage =
     typeof searchParams.page !== 'string'
       ? 1
@@ -66,13 +68,13 @@ export default async function Home({
   // const totalPages = Math.ceil(posts.length / perPage);
 
   return (
-    <div className="py-8">
+    <div className="py-8 px-4 mx-auto max-w-4xl">
       {posts.map((post) => (
         <dl key={post.slug} className="flex-col">
           <dt className="text-xl font-bold">
             <a href={`/posts/${post.slug}`}>{post.title}</a>
           </dt>
-          <dt className="text-sm text-pen2">
+          <dt className="text-sm text-muted-foreground">
             {post.publishedAt.format('YYYY-M-D')}
           </dt>
           <div className="h-12"></div>

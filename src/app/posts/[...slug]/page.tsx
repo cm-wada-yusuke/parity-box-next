@@ -2,15 +2,16 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { twJoin } from 'tailwind-merge';
 
 import { SharePostButton } from '@components/SharePostButton';
-import { getSortedPostsMeta } from '@libs/posts';
+import { getPost, getSortedPostsMeta } from '@libs/posts';
 
-interface PostProps {
+type PostProps = {
   params: {
-    slug: string;
+    slug: string[];
   };
-}
+};
 
 // async function getPostFromParams(params: PostProps['params']) {
 //   const slug = params?.slug?.join('/');
@@ -44,60 +45,52 @@ export async function generateStaticParams(): Promise<PostProps['params'][]> {
     notFound();
   }
 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  return posts.map((post) => ({ slug: post.slug.split('/') }));
 }
 
 export default async function PostPage({ params }: PostProps) {
-  const post = await getSortedPostsGrayMatter();
+  const post = await getPost(params.slug);
 
-  if (!posts) {
+  if (!post) {
     notFound();
   }
 
-  return { posts };
-  // <article className="prose dark:prose-invert">
-  //   {post.image && (
-  //     <div className="relative mb-12 h-[345px] w-full">
-  //       <Image
-  //         className="m-0 w-full rounded-lg object-cover"
-  //         src={post.image}
-  //         alt={post.title}
-  //         fill
-  //         priority
-  //         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-  //       />
-  //     </div>
-  //   )}
-
-  //   <header>
-  //     <h1 className="mb-2">{post.title}</h1>
-  //     {post.description && (
-  //       <p className="mb-6 mt-0 text-xl text-gray-700 dark:text-gray-200">
-  //         {post.description}
-  //       </p>
-  //     )}
-  //     <p className="space-x-1 text-xs text-gray-500">
-  //       <span>{format(parseISO(post.date), 'MMMM dd, yyyy')}</span>
-  //       <span>{` • `}</span>
-  //       <span>{post.readingTime.text}</span>
-  //       <span>{` • `}</span>
-  //       <span>
-  //         <Link
-  //           href={`/categories/${encodeURIComponent(
-  //             post.category.toLowerCase()
-  //           )}`}
-  //         >
-  //           {post.category}
-  //         </Link>
-  //       </span>
-  //     </p>
-  //   </header>
-  //   <hr className="my-6" />
-  //   <Mdx code={post.body.code} />
-  //   <div className="mt-12">
-  //     <SharePostButton title={post.title} slug={post.slug} />
-  //   </div>
-  // </article>
+  return (
+    <article
+      className={twJoin(
+        'py-12 px-4 mx-auto max-w-4xl break-words'
+        // '[&_a]:text-link-foreground [&_a]:decoration-link-decoration hover:[&_a]:text-link-hover-foreground hover:[&_a]:decoration-link-hover-decoration',
+        // '[&_p>img+*]:-mt-4 [&_p>img+*]:block [&_p>img+*]:text-sm [&_p>img+*]:opacity-90',
+        // '[&_code]:border-misty-slate-200 [&_code]:bg-misty-slate-100 [&_code]:text-misty-slate-900',
+        // 'dark:[&_code]:border-misty-slate-800 dark:[&_code]:bg-misty-slate-900 dark:[&_code]:text-misty-slate-400',
+        // '[&_hr]:border-border',
+        // '[&_ul>li]:marker:text-muted-foreground'
+      )}
+    >
+      <header>
+        <h1 className="text-3xl font-bold">{post.title}</h1>
+        <div className="h-2" />
+        <p className="text-muted-foreground">
+          {post.publishedAt.format('YYYY-M-D')}
+        </p>
+      </header>
+      <div className="h-12" />
+      {/* https://github.com/tailwindlabs/tailwindcss-typography?tab=readme-ov-file#element-modifiers */}
+      <div
+        className={twJoin(
+          'prose prose-zinc dark:prose-invert max-w-none',
+          'text-foreground',
+          'prose-headings:text-foreground',
+          'prose-a:text-foreground',
+          'prose-ul:leading-snug',
+          'prose-blockquote:text-muted-foreground'
+        )}
+      >
+        <div dangerouslySetInnerHTML={{ __html: post.html }} />
+      </div>
+      <div className="mt-12">
+        <SharePostButton title={post.title} slug={post.relativePath} />
+      </div>
+    </article>
+  );
 }

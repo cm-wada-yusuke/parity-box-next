@@ -8,6 +8,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { Post, PostDetail, PostMeta } from '@libs/types';
 import dayjs from 'dayjs';
+import markdownToHtml from 'zenn-markdown-html';
 
 // --------------------------------
 // GET THE PATH OF THE POSTS FOLDER
@@ -46,7 +47,7 @@ export async function getSortedPostsMeta(): Promise<PostMeta[]> {
     // Remove ".md" from file name to get id
     const fullPath = path.join(file.path, file.name);
     const relativePath = path.relative(postsDirectory, fullPath);
-    const slug = file.name.replace(/\.md$/, ''); // id = 'pre-rendering', 'ssg-ssr'
+    const slug = relativePath.replace(/\.md$/, ''); // id = 'pre-rendering', 'ssg-ssr'
 
     // Read markdown file as string
     const fileContents = fs.readFileSync(fullPath, 'utf8'); // .md string content
@@ -73,7 +74,23 @@ export async function getSortedPostsMeta(): Promise<PostMeta[]> {
   });
 }
 
-export async function getPost(slug: string): Promise<PostDetail> {}
+export async function getPost(slug: string[]): Promise<PostDetail> {
+  const fullPath = path.join(postsDirectory, `${slug.join('/')}.md`);
+  const relativePath = path.relative(postsDirectory, fullPath);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  // Use gray-matter to parse the post metadata section
+  const matterResult = matter(fileContents);
+  // Use remark to convert markdown into HTML string
+  const html = await markdownToHtml(matterResult.content);
+
+  return {
+    html,
+    slug,
+    relativePath,
+    publishedAt: dayjs(matterResult.data.published_at),
+    title: matterResult.data.title,
+  };
+}
 
 // ------------------------------------------------
 // GET THE IDs OF ALL POSTS FOR THE DYNAMIC ROUTING
