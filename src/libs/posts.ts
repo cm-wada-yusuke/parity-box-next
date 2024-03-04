@@ -74,9 +74,10 @@ export async function getSortedPostsMeta(): Promise<PostMeta[]> {
   });
 }
 
-export async function getPost(slug: string[]): Promise<PostDetail> {
-  const fullPath = path.join(postsDirectory, `${slug.join('/')}.md`);
+export async function getPost(slugs: string[]): Promise<PostDetail> {
+  const fullPath = path.join(postsDirectory, `${slugs.join('/')}.md`);
   const relativePath = path.relative(postsDirectory, fullPath);
+  const slug = relativePath.replace(/\.md$/, '');
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
@@ -86,7 +87,7 @@ export async function getPost(slug: string[]): Promise<PostDetail> {
   return {
     html,
     relativePath,
-    slug: matterResult.data.slug,
+    slug,
     publishedAt: dayjs(matterResult.data.published_at),
     title: matterResult.data.title,
   };
