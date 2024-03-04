@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="ja">
       <body className={`${inter.className} h-screen`}>
         <header className="border-b border-foreground py-4">
-          <div className="mx-auto max-w-4xl">
+          <div className="w-full">
             <h1 className="text-center text-2xl font-bold">
               <a href="/">waddyu log</a>
             </h1>

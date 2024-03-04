@@ -64,7 +64,7 @@ export default async function Home({
             className={twMerge(
               'block flex-col',
               'mt-8 px-4 py-8',
-              'border rounded-sm border-card'
+              'border rounded-sm border-card-foreground',
             )}
           >
             <p className="flex text-xl font-bold">{post.title}</p>
