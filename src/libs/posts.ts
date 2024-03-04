@@ -6,7 +6,7 @@ import path from 'path';
 
 // Import 'gray-matter', library for parsing the metadata in each markdown file
 import matter from 'gray-matter';
-import { Post, PostDetail, PostMeta } from '@libs/types';
+import { PostDetail, PostMeta } from '@libs/types';
 import dayjs from 'dayjs';
 import markdownToHtml from 'zenn-markdown-html';
 
@@ -85,8 +85,8 @@ export async function getPost(slug: string[]): Promise<PostDetail> {
 
   return {
     html,
-    slug,
     relativePath,
+    slug: matterResult.data.slug,
     publishedAt: dayjs(matterResult.data.published_at),
     title: matterResult.data.title,
   };

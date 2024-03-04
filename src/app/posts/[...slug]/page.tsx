@@ -1,5 +1,4 @@
 import { Metadata, ResolvingMetadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { twJoin } from 'tailwind-merge';
@@ -23,14 +22,16 @@ export async function generateStaticParams(): Promise<PostProps['params'][]> {
   return posts.map((post) => ({ slug: post.slug.split('/') }));
 }
 
-export async function generateMetadata(
-  { params }: PostProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PostProps): Promise<Metadata> {
   const post = await getPost(params.slug);
 
   return {
     title: `${post.title} - wadyu log`,
+    metadataBase: new URL(
+      process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+    ),
     openGraph: {
       title: `${post.title} - wadyu log`,
       url: `${process.env.NEXT_PUBLIC_SITE_URL}/posts/${post.slug}`,
@@ -52,14 +53,9 @@ export default async function PostPage({ params }: PostProps) {
   }
 
   return (
-    <div className="py-6 px-4 mx-auto max-w-4xl">
+    <div className="mx-auto max-w-4xl px-4 py-6">
       <nav className="py-4 text-sm text-muted-foreground">
-        <Link
-          href="/"
-          className="-mx-1 rounded-md p-1 hover:text-misty-slate-600"
-        >
-          ← Back
-        </Link>
+        <Link href="/">← Back</Link>
       </nav>
       <div className="h-4" />
       <article
