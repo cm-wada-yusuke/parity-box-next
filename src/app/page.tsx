@@ -7,23 +7,6 @@ import 'prism-themes/themes/prism-vsc-dark-plus.min.css';
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
-export const metadata = {
-  title: 'wadyu log',
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
-  ),
-  openGraph: {
-    title: 'Posts — waddyu log',
-    url: 'https://waddyu.dev/',
-    // images: '/assets/osgsm-banner.png',
-    type: 'website',
-  },
-  twitter: {
-    title: 'Posts — waddyu log',
-    card: 'summary',
-  },
-};
-
 interface PostProps {
   params: {
     slug: string[];
@@ -64,7 +47,7 @@ export default async function Home({
             className={twMerge(
               'block flex-col',
               'mt-8 px-4 py-8',
-              'border rounded-sm border-card-foreground',
+              'border rounded-sm border-card-foreground'
             )}
           >
             <p className="flex text-xl font-bold">{post.title}</p>

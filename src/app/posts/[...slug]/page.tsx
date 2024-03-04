@@ -83,7 +83,7 @@ export default async function PostPage({ params }: PostProps) {
             'post',
             'prose prose-zinc dark:prose-invert max-w-none',
             'text-foreground',
-            'prose-headings:text-foreground prose-h2:text-3xl',
+            'prose-headings:text-foreground prose-h1:text-3xl prose-h2:text-3xl',
             'prose-a:text-foreground',
             'prose-ul:leading-snug',
             'prose-blockquote:text-muted-foreground',
@@ -97,7 +97,7 @@ export default async function PostPage({ params }: PostProps) {
       </article>
       <div className="h-6" />
       <section>
-        <SharePostButton title={post.title} slug={post.relativePath} />
+        <SharePostButton title={post.title} slug={post.slug} />
       </section>
     </div>
   );
