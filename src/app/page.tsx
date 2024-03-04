@@ -9,6 +9,9 @@ import { twMerge } from 'tailwind-merge';
 
 export const metadata = {
   title: 'wadyu log',
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+  ),
   openGraph: {
     title: 'Posts — waddyu log',
     url: 'https://waddyu.dev/',
@@ -29,30 +32,30 @@ interface PostProps {
 
 export default async function Home({
   params,
-  searchParams,
+  // searchParams,
 }: {
   params: PostProps;
-  searchParams: { [key: string]: string | string[] | undefined };
+  // searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  const currentPage =
-    typeof searchParams.page !== 'string'
-      ? 1
-      : parseInt(searchParams.page) || 1;
-  const perPage = 2; // 1ページあたりの記事数
+  // const currentPage =
+  //   typeof searchParams.page !== 'string'
+  //     ? 1
+  //     : parseInt(searchParams.page) || 1;
+  // const perPage = 2; // 1ページあたりの記事数
 
   const posts = await getSortedPostsMeta();
   if (!posts) {
     notFound();
   }
 
-  const paginatedPosts = posts.slice(
-    (currentPage - 1) * perPage,
-    currentPage * perPage
-  );
+  // const paginatedPosts = posts.slice(
+  //   (currentPage - 1) * perPage,
+  //   currentPage * perPage
+  // );
   // const totalPages = Math.ceil(posts.length / perPage);
 
   return (
-    <section className="py-8 px-4 mx-auto max-w-4xl">
+    <section className="mx-auto max-w-4xl px-4 py-8">
       <ul>
         {posts.map((post) => (
           <Link
