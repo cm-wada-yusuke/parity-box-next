@@ -58,17 +58,7 @@ export default async function PostPage({ params }: PostProps) {
         <Link href="/">← Back</Link>
       </nav>
       <div className="h-4" />
-      <article
-        className={twJoin(
-          'mx-auto max-w-4xl break-words'
-          // '[&_a]:text-link-foreground [&_a]:decoration-link-decoration hover:[&_a]:text-link-hover-foreground hover:[&_a]:decoration-link-hover-decoration',
-          // '[&_p>img+*]:-mt-4 [&_p>img+*]:block [&_p>img+*]:text-sm [&_p>img+*]:opacity-90',
-          // '[&_code]:border-misty-slate-200 [&_code]:bg-misty-slate-100 [&_code]:text-misty-slate-900',
-          // 'dark:[&_code]:border-misty-slate-800 dark:[&_code]:bg-misty-slate-900 dark:[&_code]:text-misty-slate-400',
-          // '[&_hr]:border-border',
-          // '[&_ul>li]:marker:text-muted-foreground'
-        )}
-      >
+      <article className={twJoin('mx-auto max-w-4xl break-words')}>
         <header>
           <h1 className="text-2xl font-bold">{post.title}</h1>
           <div className="h-2" />
@@ -86,10 +76,7 @@ export default async function PostPage({ params }: PostProps) {
             'prose-headings:text-foreground prose-h1:text-3xl prose-h2:text-3xl',
             'prose-a:text-foreground',
             'prose-ul:leading-snug',
-            'prose-blockquote:text-muted-foreground',
-
-            // 同じ指定を繰り返すしかなさそう
-            '[$>aside.msg]:flex align-center'
+            'prose-blockquote:text-muted-foreground'
           )}
         >
           <div dangerouslySetInnerHTML={{ __html: post.html }} />

@@ -1,9 +1,9 @@
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
 // prism-themesを追加
 import 'prism-themes/themes/prism-vsc-dark-plus.min.css';
+import Link from 'next/link';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${inter.className} h-screen flex flex-col justify-between`}
+        className={`${inter.className} flex h-screen flex-col justify-between`}
       >
         <section>
           <header className="border-b border-foreground py-4">
@@ -49,8 +49,17 @@ export default function RootLayout({
           <main>{children}</main>
         </section>
         <section className="flex justify-center">
-          <footer className="w-full text-center py-8">
-            <p>&copy; {new Date().getFullYear()} waddyu</p>
+          <footer className="w-full py-8 text-center">
+            <p>
+              &copy; {new Date().getFullYear()}&nbsp;
+              <Link
+                className="underline"
+                target="_blank"
+                href="https://twitter.com/waddy_u"
+              >
+                waddy_u
+              </Link>
+            </p>
           </footer>
         </section>
       </body>
