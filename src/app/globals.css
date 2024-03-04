@@ -18,8 +18,14 @@
     --muted: 240, 4%, 16%;
     --muted-foreground: 215.4 16.3% 56.9%;
 
-    --card: 224 71% 4%;
+    --card: 240, 4%, 16%;
     --card-foreground: 213 31% 91%;
+
+    --warn:  197, 78.95%, 14.9%;
+    --muted-warn: 192.92, 82.28%, 30.98%;
+    
+    --alert: 0,62.82%,30.59%;
+    --muted-alert: 0, 84.24%,  60.2%;
   }
 
   body {
@@ -40,5 +46,86 @@
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+}
+
+@layer components {
+  .post {
+    aside.msg {
+      display: flex;
+      align-items: flex-start;
+      margin: 1.5rem 0;
+      padding: 1.4em 1em;
+      border-radius: 4px;
+      background: hsl(var(--warn));
+      color: hsl(var(--foreground));
+      font-size: 0.94em;
+      line-height: 1.6;
+    
+      &.alert {
+        background: hsl(var(--alert));
+      }
+    
+      a {
+        color: inherit;
+        text-decoration: underline;
+      }
+    }
+    
+    .msg-symbol {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 99rem;
+      background-color: hsl(var(--muted-warn));
+      color: #ffffff;
+    }
+    
+    aside.msg.alert .msg-symbol {
+      background-color: hsl(var(--muted-alert));
+    }
+    
+    .msg-content {
+      flex: 1;
+      margin-left: 0.6em;
+      min-width: 0; 
+    
+      & > * {
+        margin: 0.7rem 0;
+    
+        &:first-child {
+          margin-top: 0;
+        }
+    
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }  
+
+    .footnotes {
+      line-height: 1.1;
+      margin-top: 3rem;
+      color: hsl(var(--muted-foreground));
+      font-size: 0.9em;
+      li::marker {
+        color: hsl(var(--muted-foreground))
+      }
+    }
+    .footnotes-title {
+      border-bottom: solid 1px hsl(var(--muted-foreground));
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .footnotes-list {
+      margin: 2rem 0 0;
+    }
+    
+    .footnote-item:target {
+      background: hsl(var(--muted));
+    }
   }
 }

@@ -23,6 +23,11 @@ const config: Config = {
           // 文字色
           foreground: 'hsl(var(--muted-foreground))',
         },
+
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
       },
     },
   },

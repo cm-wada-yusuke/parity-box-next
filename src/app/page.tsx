@@ -3,45 +3,29 @@ import { notFound } from 'next/navigation';
 import { getSortedPostsMeta } from '@libs/posts';
 
 // prism-themesを追加
-import 'prism-themes/themes/prism-vsc-dark-plus.min.css'
+import 'prism-themes/themes/prism-vsc-dark-plus.min.css';
+import Link from 'next/link';
+import { twMerge } from 'tailwind-merge';
+
+export const metadata = {
+  title: 'wadyu log',
+  openGraph: {
+    title: 'Posts — waddyu log',
+    url: 'https://waddyu.dev/',
+    // images: '/assets/osgsm-banner.png',
+    type: 'website',
+  },
+  twitter: {
+    title: 'Posts — waddyu log',
+    card: 'summary',
+  },
+};
 
 interface PostProps {
   params: {
     slug: string[];
   };
 }
-
-// async function getPostFromParams(params: PostProps['params']) {
-//   const slug = params?.slug?.join('/');
-//   const post = allPosts.find((post) => post.slugAsParams === slug);
-
-//   if (!post) {
-//     null;
-//   }
-
-//   return post;
-// }
-
-// export async function generateMetadata({
-//   params,
-// }: PostProps): Promise<Metadata> {
-//   const post = await getPostFromParams(params);
-
-//   if (!post) {
-//     return {};
-//   }
-
-//   return {
-//     title: post.title,
-//     description: post.description,
-//   };
-// }
-
-// export async function generateStaticParams(): Promise<PostProps['params'][]> {
-//   return allPosts.map((post) => ({
-//     slug: post.slugAsParams.split('/'),
-//   }));
-// }
 
 export default async function Home({
   params,
@@ -68,20 +52,27 @@ export default async function Home({
   // const totalPages = Math.ceil(posts.length / perPage);
 
   return (
-    <div className="py-8 px-4 mx-auto max-w-4xl">
-      {posts.map((post) => (
-        <dl key={post.slug} className="flex-col">
-          <dt className="text-xl font-bold">
-            <a href={`/posts/${post.slug}`}>{post.title}</a>
-          </dt>
-          <dt className="text-sm text-muted-foreground">
-            {post.publishedAt.format('YYYY-M-D')}
-          </dt>
-          <div className="h-12"></div>
-        </dl>
-      ))}
-      {/* <Pagination totalPages={totalPages} currentPage={currentPage} /> */}
-    </div>
+    <section className="py-8 px-4 mx-auto max-w-4xl">
+      <ul>
+        {posts.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/posts/${post.slug}`}
+            className={twMerge(
+              'block flex-col',
+              'mt-8 px-4 py-8',
+              'border rounded-sm border-card'
+            )}
+          >
+            <p className="flex text-xl font-bold">{post.title}</p>
+            <p className="flex text-sm text-muted-foreground">
+              {post.publishedAt.format('YYYY-M-D')}
+            </p>
+          </Link>
+        ))}
+        {/* <Pagination totalPages={totalPages} currentPage={currentPage} /> */}
+      </ul>
+    </section>
   );
   //   <article className="prose dark:prose-invert">
   //     {post.image && (
