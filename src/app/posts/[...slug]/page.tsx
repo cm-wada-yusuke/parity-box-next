@@ -27,6 +27,10 @@ export async function generateMetadata({
 }: PostProps): Promise<Metadata> {
   const post = await getPost(params.slug);
 
+  if (!post.published) {
+    return notFound();
+  }
+
   return {
     title: `${post.title} - wadyu log`,
     metadataBase: new URL(
@@ -48,7 +52,7 @@ export async function generateMetadata({
 export default async function PostPage({ params }: PostProps) {
   const post = await getPost(params.slug);
 
-  if (!post) {
+  if (!post || !post.published) {
     notFound();
   }
 

@@ -13,11 +13,11 @@ export function ArticleCard(props: Props) {
       href={`/posts/${props.slug}`}
       className={twMerge(
         'block flex-col',
-        'mt-8 px-4 py-8',
+        'mt-8 px-4 py-6',
         'border-2 rounded-sm border-card-foreground'
       )}
     >
-      <p className="flex text-xl font-bold">{props.title}</p>
+      <p className="flex text-lg font-semibold">{props.title}</p>
       <p className="flex text-sm text-muted-foreground">
         {props.publishedAt.format('YYYY-M-D')}
       </p>

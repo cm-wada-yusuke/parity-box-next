@@ -3,8 +3,7 @@ import { notFound, redirect } from 'next/navigation';
 import { getSortedPostsMeta } from '@libs/posts';
 
 import Link from 'next/link';
-import { twMerge } from 'tailwind-merge';
-import { Pagination } from '@components/Pagenation';
+import { Pagination } from '@components/Pagination';
 import { ArticleCard } from '@components/ArticleCard';
 
 const PerPage = 10;

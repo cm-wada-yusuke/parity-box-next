@@ -2,7 +2,7 @@
 title: "コスタリカ ガンボア農園 ホワイトハニー 焙煎/抽出記録"
 published_at: "2023-01-14"
 type: "coffee"
-published: true
+published: false
 tags: ["roast"]
 ---
 

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getSortedPostsMeta } from '@libs/posts';
 
 import { ArticleCard } from '@components/ArticleCard';
-import { Pagination } from '@components/Pagenation';
+import { Pagination } from '@components/Pagination';
 
 const PerPage = 10;
 
@@ -14,7 +14,6 @@ export default async function Home() {
   }
 
   const paginatedPosts = posts.slice(0, PerPage);
-  const hasNext = posts.length > PerPage;
   const totalPages = Math.ceil(posts.length / PerPage);
 
   return (
