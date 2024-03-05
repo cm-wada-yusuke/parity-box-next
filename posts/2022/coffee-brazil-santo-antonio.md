@@ -1,7 +1,7 @@
 ---
 title: "ブラジル サントアントニオ ショコラ 焙煎/抽出記録"
 published_at: "2022-11-18"
-published: true
+published: false
 tags: ["roast"]
 thumbNailUrl: "https://storage.googleapis.com/parity-box-contents/posts/images/coffee-brazil-santo-antonio/IMG_0588.jpg"
 ---

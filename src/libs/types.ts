@@ -5,6 +5,7 @@ export type PostMeta = {
   relativePath: string;
   publishedAt: Dayjs;
   title: string;
+  published: boolean;
 };
 
 export type PostDetail = PostMeta & {
