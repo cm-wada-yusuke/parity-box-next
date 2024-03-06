@@ -2,7 +2,7 @@
 title: "Report on the issue of disappearing PDF Expert favorites"
 published_at: "2021-09-25"
 excerpt: 問い合わせの詳細再現手順をブログで書くという荒技
-published: true
+published: false
 tags: ["ipad"]
 ---
 

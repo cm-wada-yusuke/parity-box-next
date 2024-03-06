@@ -4,7 +4,7 @@ published_at: "2022-10-21"
 type: "tech"
 excerpt: 個人利用のおすそわけです
 thumbNailUrl: /images/00-thumb-nail/vscode.png
-published: true
+published: false
 tags: ["vscode"]
 ---
 

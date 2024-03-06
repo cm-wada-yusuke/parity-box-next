@@ -2,7 +2,7 @@
 title: "iPad Pro だけで 資格試験：AWS認定 ソリューションアーキテクト プロフェッショナルに合格したので記録を残す"
 published_at: "2021-09-11"
 excerpt: iPad最強
-published: true
+published: false
 tags: ["ipad"]
 ---
 

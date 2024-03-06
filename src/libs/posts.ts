@@ -17,31 +17,33 @@ export async function getSortedPostsMeta(): Promise<PostMeta[]> {
   const files = dirents.filter((dirent) => dirent.isFile());
 
   // Get the data from each file
-  const allPostsData = files.map((file) => {
-    // Remove ".md" from file name to get id
-    const fullPath = path.join(file.path, file.name);
-    const relativePath = path.relative(postsDirectory, fullPath);
-    const slug = relativePath.replace(/\.md$/, ''); // id = 'pre-rendering', 'ssg-ssr'
+  const allPostsData = files
+    .filter((f) => f.name.endsWith('.md'))
+    .map((file) => {
+      // Remove ".md" from file name to get id
+      const fullPath = path.join(file.path, file.name);
+      const relativePath = path.relative(postsDirectory, fullPath);
+      const slug = relativePath.replace(/\.md$/, ''); // id = 'pre-rendering', 'ssg-ssr'
 
-    // Read markdown file as string
-    const fileContents = fs.readFileSync(fullPath, 'utf8'); // .md string content
+      // Read markdown file as string
+      const fileContents = fs.readFileSync(fullPath, 'utf8'); // .md string content
 
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents);
+      // Use gray-matter to parse the post metadata section
+      const matterResult = matter(fileContents);
 
-    // Combine the data with the id
-    return {
-      slug,
-      relativePath,
-      publishedAt: dayjs(matterResult.data.published_at),
-      title: matterResult.data.title,
-      published: matterResult.data.published,
-    };
-  });
+      // Combine the data with the id
+      return {
+        slug,
+        relativePath,
+        publishedAt: dayjs(matterResult.data.published_at),
+        title: matterResult.data.title,
+        published: matterResult.data.published,
+      };
+    });
 
   // Sort posts by date and return
   return allPostsData
-    .filter((p) => p.published)
+    .filter((p) => p.published || process.env.NODE_ENV === 'development')
     .sort((a, b) => {
       if (a.publishedAt < b.publishedAt) {
         return 1;
