@@ -16,6 +16,8 @@ const config: Config = {
         // 全体的な文字色
         foreground: 'hsl(var(--foreground))',
 
+        hover: 'hsl(var(--hover))',
+
         // サブ的要素の背景色、文字色
         muted: {
           // 背景色

@@ -2,9 +2,9 @@ import { notFound, redirect } from 'next/navigation';
 
 import { getSortedPostsMeta } from '@libs/posts';
 
-import Link from 'next/link';
+import { PostCard } from '@components/PostCard';
 import { Pagination } from '@components/Pagination';
-import { ArticleCard } from '@components/ArticleCard';
+import { twMerge } from 'tailwind-merge';
 
 const PerPage = 10;
 
@@ -21,7 +21,6 @@ export async function generateStaticParams(): Promise<Props['params'][]> {
   }
 
   const totalPages = Math.ceil(posts.length / PerPage);
-  console.log({ totalPages });
 
   new Array(totalPages).forEach((_, i) =>
     console.log({ page: (i + 1).toString() })
@@ -55,8 +54,8 @@ export default async function PaginationPage({ params }: Props) {
     <section className="mx-auto max-w-4xl px-4 py-8">
       <ul>
         {paginatedPosts.map((post) => (
-          <li key={post.slug}>
-            <ArticleCard {...post} href={`/posts/${post.slug}`} />
+          <li key={post.slug} className="border-t border-muted first:border-0">
+            <PostCard {...post} href={`/posts/${post.slug}`} />
           </li>
         ))}
         <div className="h-12" />

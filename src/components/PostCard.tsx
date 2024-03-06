@@ -6,21 +6,22 @@ type Props = PostMeta & {
   href: string;
 };
 
-export function ArticleCard(props: Props) {
+export function PostCard(props: Props) {
   return (
-    <Link
-      key={props.slug}
+    <a
       href={`/posts/${props.slug}`}
       className={twMerge(
         'block flex-col',
-        'mt-8 px-4 py-6',
-        'border-2 rounded-sm border-card-foreground'
+        'bg-card hover:bg-hover',
+        'px-4 py-10'
       )}
     >
-      <p className="flex text-lg font-semibold">{props.title}</p>
-      <p className="flex text-sm text-muted-foreground">
+      <div className="h-4"></div>
+      <p className="text-lg font-semibold">{props.title}</p>
+      <div className="h-2"> </div>
+      <p className="text-sm text-muted-foreground">
         {props.publishedAt.format('YYYY-M-D')}
       </p>
-    </Link>
+    </a>
   );
 }
