@@ -1,7 +1,7 @@
 ---
 title: App Router で個人ブログを初回デプロイするまでにやったこと
 published_at: 2024-03-04
-published: true
+published: false
 ---
 
 - リンター

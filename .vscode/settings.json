@@ -1,0 +1,7 @@
+{
+    "pasteImage.basePath": "${projectRoot}",
+    "pasteImage.filePathConfirmInputBoxMode": "onlyName",
+    "pasteImage.insertPattern": "${imageSyntaxPrefix}/images/${currentFileNameWithoutExt}/${imageFileName}${imageSyntaxSuffix}",
+    "pasteImage.path": "${projectRoot}/public/images/${currentFileNameWithoutExt}",
+    "hediet.vscode-drawio.resizeImages": false
+}
