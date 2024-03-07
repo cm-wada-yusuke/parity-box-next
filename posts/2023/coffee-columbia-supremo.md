@@ -15,7 +15,7 @@ https://matsuyacoffee.shop-pro.jp/?pid=103815868
 
 ![](/images/coffee-columbia-supremo/IMG_0932.jpg)
 
-# 焙煎
+## 焙煎
 
 
 ## シティロースト（中深炒り）
@@ -36,7 +36,7 @@ https://matsuyacoffee.shop-pro.jp/?pid=103815868
 
 ![](/images/coffee-columbia-supremo/IMG_0928.jpg)
 
-# 抽出
+## 抽出
 
 ## [HARIO (ハリオ) 浸漬式 ドリッパー スイッチ](https://amzn.to/3tMBVkD)
 

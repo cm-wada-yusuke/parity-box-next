@@ -8,7 +8,7 @@ tags: ["terraform"]
 
 https://cloud.google.com/docs/terraform/best-practices-for-terraform?hl=ja
 
-#  命名規則を採用する
+##  命名規則を採用する
 
 ここは改善できるポイント。ベストプラクティスを尊重したい。
 
@@ -30,11 +30,11 @@ resource "google_compute_instance" "web-server" {
 
 これ、Google Cloud のリソース名がだいたいハイフン区切りなものなので、それに従ったほうがいいのかな、ということで一部を `"google_compute_instance" "web-server"` のようにしてしまっていた。アンダースコアでいいのね。物理名としてのリソースはハイフンがよさげだけど、Terraformの変数的にはアンダースコアで統一したほうがよさそうだ。
 
-# [すべてのリソースの出力を公開する](https://cloud.google.com/docs/terraform/best-practices-for-terraform?hl=ja#expose-outputs)
+## [すべてのリソースの出力を公開する](https://cloud.google.com/docs/terraform/best-practices-for-terraform?hl=ja#expose-outputs)
 
 これは疑問、そうなのか。でも、`output`がないと、モジュールをどういう順番で組み立てればいいかわからないってことかな…？
 
-# [環境ディレクトリに分割する](https://cloud.google.com/docs/terraform/best-practices-for-terraform?hl=ja#subdirectories)
+## [環境ディレクトリに分割する](https://cloud.google.com/docs/terraform/best-practices-for-terraform?hl=ja#subdirectories)
 
 これ、できてる！すげえ！同僚に感謝！
 

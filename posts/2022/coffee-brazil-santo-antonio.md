@@ -12,7 +12,7 @@ thumbNailUrl: "https://storage.googleapis.com/parity-box-contents/posts/images/c
 https://matsuyacoffee.shop-pro.jp/?pid=103822548
 ![](/images/coffee-brazil-santo-antonio/IMG_0579.jpg)
 
-# 焙煎
+## 焙煎
 
 
 ## #R1 ミディアムロースト
@@ -59,7 +59,7 @@ https://matsuyacoffee.shop-pro.jp/?pid=103822548
 
 ひび割れが減った！やはり乾燥してしまっていたようだ。あと豆の大きさも中程度なので、やや低めの温度でやるのがよかったみたい。
 
-# 抽出
+## 抽出
 
 ## #E1 [HARIO (ハリオ) 浸漬式 ドリッパー スイッチ](https://amzn.to/3tMBVkD)
 

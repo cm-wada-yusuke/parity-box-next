@@ -18,7 +18,7 @@ https://github.com/iamvishnusankar/next-sitemap
 静的サイトで `sitemap.xml` を生成する例はいくつか見つかったのですが、動的に生成するサンプルが少なく感じたので記録を残します。
 
 
-# ビルド時に `robots.txt` が生成されるようにする（SSG, SSR共通）
+## ビルド時に `robots.txt` が生成されるようにする（SSG, SSR共通）
 
 `postbuild` で生成するようです。以下の記述を加えればOKです。
 
@@ -39,7 +39,7 @@ https://github.com/iamvishnusankar/next-sitemap
 
 これで `next build` を実行すると自動で `/robots.txt` が生成されます。
 
-# `pages/server-sitemap.xml/index.tsx` ファイルを作成する
+## `pages/server-sitemap.xml/index.tsx` ファイルを作成する
 
 `server-sitemap.xml`という名前にして大丈夫なのかな？と思いましたが `robots.txt` で明示的に指定するので問題なさそうです。
 
@@ -90,7 +90,7 @@ export default () => {};
 </urlset>
 ```
 
-# `robots.txt` を生成する
+## `robots.txt` を生成する
 
 robots.txt はnext-sitemapが自動で生成してくれますが、どのような内容を出力するかについて、設定ファイルで大まかに制御できます。`next-sitemap.js`を以下のようにしました。
 
@@ -112,20 +112,20 @@ module.exports = {
 `robotsTxtOptions.additionalSitemaps` で動的に生成するサイトマップを指定しています。これでクロール対象に `server-siteamp.xml` で挙げたURLが含まれるようになります。この設定でビルドしてみましょう。`next build`で生成される`robots.txt`は以下のようになります。
 
 ```text:/robots.txt
-# *
+## *
 User-agent: *
 Allow: /
 
-# Host
+## Host
 Host: https://blog.parity-box.com
 
-# Sitemaps
+## Sitemaps
 Sitemap: https://blog.parity-box.com/sitemap.xml
 Sitemap: https://blog.parity-box.com/server-sitemap.xml
 ```
 
 `next-sitemap.js`の設定が反映され、`server-sitemap.xml`が含まれていることがわかります。
 
-# おわりに
+## おわりに
 
 next-sitemap で動的にサイトマップとrobots.txtを生成しました。参考になれば幸いです。

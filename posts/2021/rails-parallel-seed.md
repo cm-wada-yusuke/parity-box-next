@@ -21,7 +21,7 @@ end
 ただ、負荷テスト目的なので大量のフェイクデータを作成したい場合、ループ処理だと時間がかかります。そこでスレッドを作成して並列実行できる [parallel](https://github.com/grosser/parallel) を使います。子プロセスを立ち上げる方式だと環境変数の共有やらが大変そうなので、大抵の場合はマルチスレッドモードでよさそうな気がしますね。
 
 ```ruby:sample.rb
-# maybe helps: explicitly use connection pool
+## maybe helps: explicitly use connection pool
 Parallel.each(User.all, in_threads: 8) do |user|
   ActiveRecord::Base.connection_pool.with_connection do
     user.update_attribute(:some_attribute, some_value)

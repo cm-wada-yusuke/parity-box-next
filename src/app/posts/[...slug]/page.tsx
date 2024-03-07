@@ -65,20 +65,20 @@ export default async function PostPage({ params }: PostProps) {
       <div className="h-4" />
       <article className={twJoin('mx-auto max-w-4xl break-words')}>
         <header>
-          <h1 className="text-2xl font-bold">{post.title}</h1>
+          <h1 className="text-3xl font-bold">{post.title}</h1>
           <div className="h-2" />
           <p className="text-muted-foreground">
             {post.publishedAt.format('YYYY-M-D')}
           </p>
         </header>
-        <div className="h-6" />
+        <div className="h-10"/>
         {/* https://github.com/tailwindlabs/tailwindcss-typography?tab=readme-ov-file#element-modifiers */}
         <div
           className={twJoin(
             'post',
             'prose prose-zinc dark:prose-invert max-w-none',
             'text-foreground',
-            'prose-headings:text-foreground prose-h1:text-3xl prose-h2:text-3xl',
+            'prose-headings:text-foreground prose-h1:text-2xl prose-h2:text-2xl',
             'prose-a:text-foreground',
             'prose-ul:leading-snug',
             'prose-blockquote:text-muted-foreground'

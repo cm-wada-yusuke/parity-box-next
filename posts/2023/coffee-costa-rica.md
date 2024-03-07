@@ -15,7 +15,7 @@ https://matsuyacoffee.shop-pro.jp/?pid=147879717
 
 ![](/images/coffee-costa-rica/IMG_0951.jpg)
 
-# 焙煎
+## 焙煎
 
 
 ## ハイロースト（中炒り）
@@ -36,7 +36,7 @@ https://matsuyacoffee.shop-pro.jp/?pid=147879717
 
 ![](/images/coffee-costa-rica/IMG_0952.jpg)
 
-# 抽出
+## 抽出
 
 ## [HARIO (ハリオ) 浸漬式 ドリッパー スイッチ](https://amzn.to/3tMBVkD)
 
