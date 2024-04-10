@@ -1,5 +1,4 @@
 import { PostMeta } from '@libs/types';
-import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
 type Props = PostMeta & {
