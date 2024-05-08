@@ -1,10 +1,4 @@
 'use client';
-import { notFound, redirect } from 'next/navigation';
-
-import { getSortedPostsMeta } from '@libs/posts';
-
-import { PostCard } from '@components/PostCard';
-import { Pagination } from '@components/Pagination';
 import { twMerge } from 'tailwind-merge';
 import { useState } from 'react';
 import dayjs from 'dayjs';
@@ -24,16 +18,23 @@ function format(day: dayjs.Dayjs) {
 export default function HanedaParkingReservationCalculatorPage({
   params,
 }: Props) {
-  const [departureDate, setDepartureDate] = useState(dayjs());
-  const [arrivalDate, setArrivalDate] = useState(dayjs().add(7, 'days'));
+  const [departureDate, setDepartureDate] = useState(dayjs()); // 設定してもらう出発日、デフォルトを今日ににしておく
+  const [arrivalDate, setArrivalDate] = useState(dayjs().add(7, 'days')); // 設定してもらう到着日、デフォルトを7日後にしておく
 
-  const canStartReservationDate = departureDate.subtract(43, 'days');
-  const startReservationDate = departureDate.subtract(13, 'days');
+  // 最初の予約
+  const firstReservationDate = departureDate.subtract(43, 'days'); // 最初の予約が可能になる日
+  const firstReservationDepartureDate = departureDate.subtract(13, 'days'); // 最初の予約をするときに設定する出発日
+  const firstReservationArrivalDate = departureDate; // 最初の予約をするときに設定する到着日 これを本来の出発日にする
 
-  const canChangedStartReservationDate = arrivalDate.subtract(43, 'days');
-  const changedStartReservationDate = arrivalDate.subtract(13, 'days');
+  // 1回目の予約変更
+  const firstChangeReservationDate = arrivalDate.subtract(43, 'days'); // 1回目の予約変更を行う日
+  const firstChangeDepartureDate = arrivalDate.subtract(13, 'days'); // 1回目の予約変更を行うときに設定する出発日
+  const firstChangeArrivalDate = arrivalDate; // 1回目の予約変更を行うときに設定する到着日 これを本来の到着日にする
 
-  const canFinalStartReservationDate = departureDate.subtract(30, 'days');
+  // 2回目の予約変更（一般人が行うのと同じ結果、本来の日付になる）
+  const secondChangeReservationDate = departureDate.subtract(30, 'days');
+  const secondChangeDepartureDate = departureDate;
+  const secondChangeArrivalDate = arrivalDate;
 
   const handleDepartureDateChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -63,40 +64,37 @@ export default function HanedaParkingReservationCalculatorPage({
       <div>
         <h2>1. 最大予約日数分確保する</h2>
         <p>
-          {format(canStartReservationDate)}
+          {format(firstReservationDate)}
           の10時に予約します
         </p>
         <p>
-          {format(startReservationDate)}
+          {format(firstReservationDepartureDate)}
           から
-          {format(departureDate)}
+          {format(firstReservationArrivalDate)}
           で予約してください。時間は実際に駐車場へ到着する予定時刻くらいで大丈夫です。
         </p>
-        <h2>2. 終了日をあわせる</h2>
+        <h2>2. 終了日をあわせる（1回目の予約変更）</h2>
         <p>
           {arrivalDate.diff(departureDate, 'days')}日後の、
-          {format(canChangedStartReservationDate)}の10時に変更操作します
+          {format(firstChangeReservationDate)}の10時に変更操作します
         </p>
         <p>
-          {format(changedStartReservationDate)}
+          {format(firstChangeDepartureDate)}
           から
-          {format(arrivalDate)}
+          {format(firstChangeArrivalDate)}
           で予約してください
         </p>
-        <h2>3. 実際の予約期間にする</h2>
+        <h2>3. 実際の予約期間にする（2回目の予約変更）</h2>
         <p>
           さらに
-          {canFinalStartReservationDate.diff(
-            canChangedStartReservationDate,
-            'days'
-          )}
+          {secondChangeReservationDate.diff(firstChangeReservationDate, 'days')}
           日後、
-          {format(canFinalStartReservationDate)}の10時に変更操作します
+          {format(secondChangeReservationDate)}の10時に変更操作します
         </p>
         <p>
-          {format(departureDate)}
+          {format(secondChangeDepartureDate)}
           から
-          {format(arrivalDate)}
+          {format(secondChangeArrivalDate)}
           で予約してください
         </p>
       </div>

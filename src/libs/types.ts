@@ -11,3 +11,9 @@ export type PostMeta = {
 export type PostDetail = PostMeta & {
   html: string;
 };
+
+export type MyappMeta = {
+  appName: string;
+  title: string;
+  date: string;
+};
