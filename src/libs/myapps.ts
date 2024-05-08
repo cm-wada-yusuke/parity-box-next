@@ -1,6 +1,6 @@
-import { MyappsMeta } from './types';
+import { MyappMeta } from './types';
 
-export function getMyappsMeta(): MyappsMeta[] {
+export function getMyappsMeta(): MyappMeta[] {
   return [
     {
       appName: 'haneda-parking-reservation-calculator',
