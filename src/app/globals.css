@@ -52,6 +52,21 @@
 
 @layer components {
   .post {
+    /* ![](path_to_image)
+        *caption* 
+      画像の下にキャプションを表示する
+    */
+    img + br {
+      display: none;
+    }
+    img ~ em {
+      display: block;
+      margin: -1rem auto 0;
+      line-height: 1.3;
+      text-align: center;
+      color: hsl(var(--muted-foreground));
+      font-size: 0.92em;
+    }
     aside.msg {
       display: flex;
       align-items: flex-start;
@@ -127,6 +142,32 @@
     
     .footnote-item:target {
       background: hsl(var(--muted));
+    }
+    
+    
+    /* 埋め込み */
+    span.embed-block {
+      /* markdown-it が<p>タグでコンテンツを囲むので、内部で<div>が使えない
+      そのため、<div>を使いたいシーンでは<div>のかわりに<span>で囲み、このCSSでdisplay: block;を指定する
+      参考: https://stackoverflow.com/questions/8397852/why-cant-the-p-tag-contain-a-div-tag-inside-it */
+      display: block;
+      width: 100%;
+      margin: 1.5rem 0;
+    }
+
+    .embed-youtube {
+      padding-bottom: calc(56.25% + 38px);
+      position: relative;
+      width: 100%;
+      height: 0;
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
     }
   }
 }
