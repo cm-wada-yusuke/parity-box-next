@@ -61,7 +61,13 @@ export async function getPost(slugs: string[]): Promise<PostDetail> {
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
   // Use remark to convert markdown into HTML string
-  const html = await markdownToHtml(matterResult.content);
+  const html = await markdownToHtml(matterResult.content, {
+    customEmbed: {
+      mermaid(str) {
+        return `<div class="mermaid">${str}</div>`;
+      },
+    },
+  });
 
   return {
     html,

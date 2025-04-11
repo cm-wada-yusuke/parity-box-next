@@ -4,6 +4,7 @@ import './globals.css';
 // prism-themesを追加
 import 'prism-themes/themes/prism-vsc-dark-plus.min.css';
 import Link from 'next/link';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,6 +36,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/mermaid/dist/mermaid.min.css"
+        ></link>
+        <Script
+          strategy="beforeInteractive"
+          src="https://unpkg.com/mermaid@11/dist/mermaid.min.js"
+        />
+      </head>
       <body
         className={`${inter.className} flex h-screen flex-col justify-between`}
       >

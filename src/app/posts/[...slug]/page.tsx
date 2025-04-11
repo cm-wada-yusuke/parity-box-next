@@ -71,7 +71,7 @@ export default async function PostPage({ params }: PostProps) {
             {post.publishedAt.format('YYYY-M-D')}
           </p>
         </header>
-        <div className="h-10"/>
+        <div className="h-10" />
         {/* https://github.com/tailwindlabs/tailwindcss-typography?tab=readme-ov-file#element-modifiers */}
         <div
           className={twJoin(
