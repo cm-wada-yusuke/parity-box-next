@@ -66,6 +66,9 @@ export async function getPost(slugs: string[]): Promise<PostDetail> {
       mermaid(str) {
         return `<div class="mermaid">${str}</div>`;
       },
+      // card(str) {
+      //   return `<div class="card">${str}</div>`;
+      // },
     },
   });
 

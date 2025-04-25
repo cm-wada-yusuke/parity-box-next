@@ -1,11 +1,11 @@
-import { Metadata, ResolvingMetadata } from 'next';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { twJoin } from 'tailwind-merge';
 
+import '@components/EmbedElements';
 import { SharePostButton } from '@components/SharePostButton';
 import { getPost, getSortedPostsMeta } from '@libs/posts';
-import '@components/EmbedElements';
 
 type PostProps = {
   params: {
@@ -58,15 +58,15 @@ export default async function PostPage({ params }: PostProps) {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-6">
-      <nav className="py-4 text-sm text-muted-foreground">
+    <div className="mx-auto max-w-4xl md:px-0 py-6">
+      <nav className="px-4 lg:px-0 py-4 text-sm text-muted-foreground">
         <Link href="/">← Back</Link>
       </nav>
       <div className="h-4" />
       <article
         className={twJoin(
           'mx-auto max-w-4xl break-words',
-          'bg-card p-16 rounded-md' // 背景色をカード色に、パディングと角丸を追加
+          'bg-card py-16 lg:px-12 px-6 lg:rounded-md rounded-none' // 背景色をカード色に、パディングと角丸を追加
         )}
       >
         <header>
@@ -96,7 +96,7 @@ export default async function PostPage({ params }: PostProps) {
         </div>
       </article>
       <div className="h-6" />
-      <section>
+      <section className="px-4 lg:px-0">
         <SharePostButton title={post.title} slug={post.slug} />
       </section>
     </div>
