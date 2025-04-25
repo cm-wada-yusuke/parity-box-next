@@ -63,7 +63,12 @@ export default async function PostPage({ params }: PostProps) {
         <Link href="/">← Back</Link>
       </nav>
       <div className="h-4" />
-      <article className={twJoin('mx-auto max-w-4xl break-words')}>
+      <article
+        className={twJoin(
+          'mx-auto max-w-4xl break-words',
+          'bg-card p-16 rounded-md' // 背景色をカード色に、パディングと角丸を追加
+        )}
+      >
         <header>
           <h1 className="text-3xl font-bold">{post.title}</h1>
           <div className="h-2" />
@@ -76,12 +81,15 @@ export default async function PostPage({ params }: PostProps) {
         <div
           className={twJoin(
             'post',
-            'prose prose-zinc dark:prose-invert max-w-none',
-            'text-foreground',
-            'prose-headings:text-foreground prose-h1:text-2xl prose-h2:text-2xl',
-            'prose-a:text-foreground',
-            'prose-ul:leading-snug',
-            'prose-blockquote:text-muted-foreground'
+            'prose prose-zinc dark:prose-invert max-w-none', // ベースのタイポグラフィスタイル
+            'text-foreground', // デフォルトのテキスト色
+            // 見出しを目立たせるために、フォントウェイトとサイズを調整
+            'prose-headings:text-foreground prose-headings:font-semibold', // 見出しの色と太さ
+            'prose-h1:text-3xl prose-h2:text-3xl prose-h2:mt-16 prose-h3:text-2xl prose-h3:mt-12', // H1, H2, H3のサイズと上部マージンを調整
+            'prose-a:text-foreground', // リンクの色
+            'prose-ul:leading-snug', // リストの行間
+            'prose-blockquote:text-muted-foreground', // 引用ブロックの色
+            'prose-img:mx-auto' // 画像を中央寄せにするためのクラスを追加
           )}
         >
           <div dangerouslySetInnerHTML={{ __html: post.html }} />

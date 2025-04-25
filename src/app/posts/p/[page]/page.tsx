@@ -4,7 +4,6 @@ import { getSortedPostsMeta } from '@libs/posts';
 
 import { PostCard } from '@components/PostCard';
 import { Pagination } from '@components/Pagination';
-import { twMerge } from 'tailwind-merge';
 
 const PerPage = 10;
 

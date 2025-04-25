@@ -12,7 +12,7 @@ export function PostCard(props: Props) {
       className={twMerge(
         'block flex-col',
         'bg-card hover:bg-hover',
-        'px-4 py-10'
+        'px-8 pt-4 pb-6'
       )}
     >
       <div className="h-4"></div>
