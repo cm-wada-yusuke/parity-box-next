@@ -17,6 +17,7 @@ export function Pagination(props: Props) {
           className={twMerge(
             'px-4 py-2',
             'w-1/3',
+            'text-foreground hover:text-foreground',
             'hover:bg-hover',
             'border-2 border-card-foreground',
             'rounded-sm',
@@ -34,6 +35,7 @@ export function Pagination(props: Props) {
           className={twMerge(
             'px-4 py-2',
             'w-1/3',
+            'text-foreground hover:text-foreground',
             'hover:bg-hover',
             'border-2 border-card-foreground',
             'rounded-sm',

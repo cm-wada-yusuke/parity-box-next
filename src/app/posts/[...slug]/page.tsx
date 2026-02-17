@@ -59,8 +59,8 @@ export default async function PostPage({ params }: PostProps) {
 
   return (
     <div className="mx-auto max-w-4xl md:px-0 py-6">
-      <nav className="px-4 lg:px-0 py-4 text-sm text-muted-foreground">
-        <Link href="/">← Back</Link>
+      <nav className="px-4 lg:px-0 py-4 text-sm">
+        <Link href="/" className="text-accent hover:text-accent-muted">← Back</Link>
       </nav>
       <div className="h-4" />
       <article
@@ -70,11 +70,19 @@ export default async function PostPage({ params }: PostProps) {
         )}
       >
         <header>
+          <p className="text-sm text-accent-muted font-mono">
+            ~/posts/{post.slug}.md
+          </p>
+          <div className="h-3" />
           <h1 className="text-3xl font-bold">{post.title}</h1>
           <div className="h-2" />
-          <p className="text-muted-foreground">
+          <p className="text-accent-muted">
             {post.publishedAt.format('YYYY-M-D')}
           </p>
+          <div className="h-4" />
+          <div className="overflow-hidden text-accent-muted opacity-40 select-none" aria-hidden="true">
+            {'─'.repeat(200)}
+          </div>
         </header>
         <div className="h-10" />
         {/* https://github.com/tailwindlabs/tailwindcss-typography?tab=readme-ov-file#element-modifiers */}
@@ -85,8 +93,8 @@ export default async function PostPage({ params }: PostProps) {
             'text-foreground', // デフォルトのテキスト色
             // 見出しを目立たせるために、フォントウェイトとサイズを調整
             'prose-headings:text-foreground prose-headings:font-semibold', // 見出しの色と太さ
-            'prose-h1:text-3xl prose-h2:text-3xl prose-h2:mt-16 prose-h3:text-2xl prose-h3:mt-12', // H1, H2, H3のサイズと上部マージンを調整
-            'prose-a:text-foreground', // リンクの色
+            'prose-h1:text-3xl prose-h2:text-3xl prose-h2:mt-16 prose-h2:border-l-2 prose-h2:border-accent prose-h2:pl-3 prose-h3:text-2xl prose-h3:mt-12 prose-h3:border-l-2 prose-h3:border-accent-muted prose-h3:pl-3', // H1, H2, H3のサイズと上部マージン、左ボーダーを調整
+            'prose-a:text-accent hover:prose-a:text-accent-muted', // リンクの色
             'prose-ul:leading-snug', // リストの行間
             'prose-blockquote:text-muted-foreground', // 引用ブロックの色
             'prose-img:mx-auto' // 画像を中央寄せにするためのクラスを追加

@@ -30,6 +30,11 @@ const config: Config = {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
         },
+
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          muted: 'hsl(var(--accent-muted))',
+        },
       },
     },
   },

@@ -9,7 +9,7 @@ import Script from 'next/script';
 const inter = Inter({ subsets: ['latin'] });
 
 export const viewport = {
-  themeColor: '#18181b',
+  themeColor: '#1a1b26',
 };
 
 export const metadata = {
@@ -50,7 +50,7 @@ export default function RootLayout({
         className={`${inter.className} flex h-screen flex-col justify-between`}
       >
         <section>
-          <header className="border-b border-foreground py-4">
+          <header className="border-b border-accent py-4">
             <div className="w-full">
               <h1 className="text-center text-2xl font-bold">
                 <a href="/">waddyu log</a>

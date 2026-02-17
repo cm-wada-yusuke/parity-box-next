@@ -12,25 +12,35 @@
 
 @layer base {
   :root {
-    --background: 240, 6%, 10%;
-    --foreground: 240, 5%, 84%;
-    --hover:240, 4%, 16%;
+    --background: 235, 19%, 13%;          /* #1a1b26 Tokyo Night */
+    --foreground: 225, 15%, 88%;          /* 白ベース（やや青みがかった白） */
+    --hover: 235, 15%, 20%;
 
-    --muted: 240, 4%, 16%;
-    --muted-foreground: 215.4 16.3% 56.9%;
+    --muted: 235, 15%, 18%;
+    --muted-foreground: 225, 10%, 55%;
 
-    --card: 240, 8%, 13%;
-    --card-foreground: 215.4 16.3% 56.9%;
+    --card: 235, 19%, 16%;
+    --card-foreground: 225, 10%, 55%;
+
+    --accent: 18, 39%, 50%;               /* #B06B4E テラコッタ */
+    --accent-muted: 18, 30%, 40%;         /* テラコッタ（控えめ） */
 
     --warn:  197, 78.95%, 14.9%;
     --muted-warn: 192.92, 82.28%, 30.98%;
-    
-    --alert: 0,62.82%,30.59%;
-    --muted-alert: 0, 84.24%,  60.2%;
+
+    --alert: 0, 62.82%, 30.59%;
+    --muted-alert: 0, 84.24%, 60.2%;
   }
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  a {
+    @apply text-accent;
+  }
+  a:hover {
+    @apply text-accent-muted;
   }
 }
 
