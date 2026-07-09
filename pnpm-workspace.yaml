@@ -1,2 +1,7 @@
+# packages はルート単体（Vercel の pnpm 9 がワークスペース定義として解釈するため必須）
+packages:
+  - '.'
+
+# pnpm v10+ はビルドスクリプトの実行をデフォルトで拒否するため、許可する依存をここに列挙する
 allowBuilds:
   unrs-resolver: true
