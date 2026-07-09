@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
+// カラー・タイポグラフィは DESIGN.md（wired-light design tokens）の定義に準拠する
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -10,31 +12,44 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // 全体的な背景色
-        background: 'hsl(var(--background))',
-
-        // 全体的な文字色
-        foreground: 'hsl(var(--foreground))',
-
-        hover: 'hsl(var(--hover))',
-
-        // サブ的要素の背景色、文字色
+        paper: {
+          DEFAULT: '#f7f7f5',
+          raised: '#ededea',
+        },
+        ink: '#3a3a3e',
+        body: {
+          DEFAULT: '#505054',
+          strong: '#454549',
+        },
         muted: {
-          // 背景色
-          DEFAULT: 'hsl(var(--muted))',
-          // 文字色
-          foreground: 'hsl(var(--muted-foreground))',
+          DEFAULT: '#8a8a87',
+          soft: '#a6a6a2',
         },
-
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+        hairline: {
+          DEFAULT: '#e2e2df',
+          strong: '#c4c4c0',
         },
-
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          muted: 'hsl(var(--accent-muted))',
+        link: {
+          DEFAULT: '#4059cf',
+          active: '#32479f',
         },
+        'on-link': '#ffffff',
+        success: '#338a4e',
+        warning: '#b3891a',
+        error: '#c44536',
+      },
+      fontFamily: {
+        sans: [
+          'var(--font-inter)',
+          'var(--font-noto-sans-jp)',
+          ...defaultTheme.fontFamily.sans,
+        ],
+        display: [
+          'var(--font-noto-sans-jp)',
+          'var(--font-inter)',
+          ...defaultTheme.fontFamily.sans,
+        ],
+        mono: ['var(--font-jetbrains-mono)', ...defaultTheme.fontFamily.mono],
       },
     },
   },

@@ -9,20 +9,19 @@ export function PostCard(props: Props) {
   return (
     <a
       href={`/posts/${props.slug}`}
-      className={twMerge(
-        'block flex-col',
-        'text-foreground hover:text-foreground',
-        'bg-background hover:bg-hover',
-        'border-l-2 border-muted hover:border-accent',
-        'px-8 pt-4 pb-6',
-        'transition-colors duration-150'
-      )}
+      className={twMerge('group block flex-col', 'px-2 py-6')}
     >
-      <div className="h-4"></div>
-      <p className="text-lg font-semibold">{props.title}</p>
-      <div className="h-2"> </div>
-      <p className="text-sm text-accent-muted">
+      <p className="font-mono text-xs uppercase tracking-widest text-muted">
         {props.publishedAt.format('YYYY-M-D')}
+      </p>
+      <div className="h-2"> </div>
+      <p
+        className={twMerge(
+          'font-display text-xl font-semibold text-ink',
+          'transition-colors duration-150 group-hover:text-link'
+        )}
+      >
+        {props.title}
       </p>
     </a>
   );

@@ -2,57 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0; */
-  }
-}
-
 @layer base {
   :root {
-    --background: 235, 19%, 13%;          /* #1a1b26 Tokyo Night */
-    --foreground: 225, 15%, 88%;          /* 白ベース（やや青みがかった白） */
-    --hover: 235, 15%, 20%;
-
-    --muted: 235, 15%, 18%;
-    --muted-foreground: 225, 10%, 55%;
-
-    --card: 235, 19%, 16%;
-    --card-foreground: 225, 10%, 55%;
-
-    --accent: 18, 39%, 50%;               /* #B06B4E テラコッタ */
-    --accent-muted: 18, 30%, 40%;         /* テラコッタ（控えめ） */
-
-    --warn:  197, 78.95%, 14.9%;
-    --muted-warn: 192.92, 82.28%, 30.98%;
-
-    --alert: 0, 62.82%, 30.59%;
-    --muted-alert: 0, 84.24%, 60.2%;
+    /* DESIGN.md（wired-light）のトークン値。.post 内の生 CSS から参照する */
+    --paper: #f7f7f5;
+    --paper-raised: #ededea;
+    --ink: #3a3a3e;
+    --body: #505054;
+    --muted: #8a8a87;
+    --muted-soft: #a6a6a2;
+    --hairline: #e2e2df;
+    --warning: #b3891a;
+    --error: #c44536;
+    --on-link: #ffffff;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-paper text-body;
   }
 
   a {
-    @apply text-accent;
+    @apply text-link;
   }
   a:hover {
-    @apply text-accent-muted;
+    @apply text-link-active;
   }
 }
-
-/* body { */
-/* color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
-/* } */
 
 @layer utilities {
   .text-balance {
@@ -62,8 +37,15 @@
 
 @layer components {
   .post {
+    /* インラインコード（コードブロックは除く）: 装飾バッククォートのかわりに面差で表現する */
+    :not(pre) > code {
+      background: var(--paper-raised);
+      padding: 0.15em 0.4em;
+      font-weight: 400;
+    }
+
     /* ![](path_to_image)
-        *caption* 
+        *caption*
       画像の下にキャプションを表示する
     */
     img + br {
@@ -74,7 +56,7 @@
       margin: -1rem auto 0;
       line-height: 1.3;
       text-align: center;
-      color: hsl(var(--muted-foreground));
+      color: var(--muted);
       font-size: 0.92em;
     }
     aside.msg {
@@ -82,22 +64,22 @@
       align-items: flex-start;
       margin: 1.5rem 0;
       padding: 1.4em 1em;
-      border-radius: 4px;
-      background: hsl(var(--warn));
-      color: hsl(var(--foreground));
+      border-radius: 0;
+      background: color-mix(in srgb, var(--warning) 10%, var(--paper));
+      color: var(--body);
       font-size: 0.94em;
       line-height: 1.6;
-    
+
       &.alert {
-        background: hsl(var(--alert));
+        background: color-mix(in srgb, var(--error) 10%, var(--paper));
       }
-    
+
       a {
         color: inherit;
         text-decoration: underline;
       }
     }
-    
+
     .msg-symbol {
       display: flex;
       align-items: center;
@@ -106,55 +88,54 @@
       width: 1.4rem;
       height: 1.4rem;
       border-radius: 99rem;
-      background-color: hsl(var(--muted-warn));
-      color: #ffffff;
+      background-color: var(--warning);
+      color: var(--on-link);
     }
-    
+
     aside.msg.alert .msg-symbol {
-      background-color: hsl(var(--muted-alert));
+      background-color: var(--error);
     }
-    
+
     .msg-content {
       flex: 1;
       margin-left: 0.6em;
-      min-width: 0; 
-    
+      min-width: 0;
+
       & > * {
         margin: 0.7rem 0;
-    
+
         &:first-child {
           margin-top: 0;
         }
-    
+
         &:last-child {
           margin-bottom: 0;
         }
       }
-    }  
+    }
 
     .footnotes {
       line-height: 1.1;
       margin-top: 3rem;
-      color: hsl(var(--muted-foreground));
+      color: var(--muted);
       font-size: 0.9em;
       li::marker {
-        color: hsl(var(--muted-foreground))
+        color: var(--muted);
       }
     }
     .footnotes-title {
-      border-bottom: solid 1px hsl(var(--muted-foreground));
+      border-bottom: solid 1px var(--hairline);
       font-weight: 700;
       font-size: 16px;
     }
     .footnotes-list {
       margin: 2rem 0 0;
     }
-    
+
     .footnote-item:target {
-      background: hsl(var(--muted));
+      background: var(--paper-raised);
     }
-    
-    
+
     /* 埋め込み */
     span.embed-block {
       /* markdown-it が<p>タグでコンテンツを囲むので、内部で<div>が使えない

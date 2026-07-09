@@ -14,7 +14,7 @@ export function SharePostButton({ title, slug }: Props) {
   return (
     <div className="flex items-center justify-end">
       <TwitterShareButton
-        style={{ border: '1px solid #7f8ea3' }}
+        style={{ border: '1px solid #e2e2df' /* {colors.hairline} */ }}
         url={url}
         title={title}
         via={twitterHandle}

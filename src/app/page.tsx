@@ -19,13 +19,11 @@ export default async function Home() {
   return (
     <section className="mx-auto max-w-4xl px-4 py-8">
       <ul>
-        {paginatedPosts.map((post, i) => (
-          <li key={post.slug}>
-            {i > 0 && (
-              <div className="overflow-hidden text-accent-muted opacity-40 select-none" aria-hidden="true">
-                {'─'.repeat(200)}
-              </div>
-            )}
+        {paginatedPosts.map((post) => (
+          <li
+            key={post.slug}
+            className="border-t border-hairline first:border-0"
+          >
             <PostCard {...post} href={`/posts/${post.slug}`} />
           </li>
         ))}

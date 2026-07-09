@@ -53,7 +53,10 @@ export default async function PaginationPage({ params }: Props) {
     <section className="mx-auto max-w-4xl px-4 py-8">
       <ul>
         {paginatedPosts.map((post) => (
-          <li key={post.slug} className="border-t border-muted first:border-0">
+          <li
+            key={post.slug}
+            className="border-t border-hairline first:border-0"
+          >
             <PostCard {...post} href={`/posts/${post.slug}`} />
           </li>
         ))}

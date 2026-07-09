@@ -58,45 +58,47 @@ export default async function PostPage({ params }: PostProps) {
   }
 
   return (
-    <div className="mx-auto max-w-4xl md:px-0 py-6">
-      <nav className="px-4 lg:px-0 py-4 text-sm">
-        <Link href="/" className="text-accent hover:text-accent-muted">← Back</Link>
+    <div className="mx-auto max-w-4xl py-6 md:px-0">
+      <nav className="p-4 lg:px-0">
+        <Link
+          href="/"
+          className="font-mono text-xs uppercase tracking-widest text-link hover:text-link-active"
+        >
+          ← Back
+        </Link>
       </nav>
       <div className="h-4" />
-      <article
-        className={twJoin(
-          'mx-auto max-w-4xl break-words',
-          'bg-card py-16 lg:px-12 px-6 lg:rounded-md rounded-none' // 背景色をカード色に、パディングと角丸を追加
-        )}
-      >
+      <article className="mx-auto max-w-4xl break-words px-6 py-10 lg:px-0">
         <header>
-          <p className="text-sm text-accent-muted font-mono">
+          {/* mono キッカー（DESIGN.md: article-header） */}
+          <p className="font-mono text-xs tracking-widest text-link">
             ~/posts/{post.slug}.md
           </p>
           <div className="h-3" />
-          <h1 className="text-3xl font-bold">{post.title}</h1>
-          <div className="h-2" />
-          <p className="text-accent-muted">
+          <h1 className="font-display text-3xl font-bold leading-snug tracking-tight text-ink lg:text-4xl">
+            {post.title}
+          </h1>
+          <div className="h-3" />
+          <p className="font-mono text-sm text-muted">
             {post.publishedAt.format('YYYY-M-D')}
           </p>
-          <div className="h-4" />
-          <div className="overflow-hidden text-accent-muted opacity-40 select-none" aria-hidden="true">
-            {'─'.repeat(200)}
-          </div>
+          <div className="h-6" />
+          <div className="border-b border-hairline" />
         </header>
         <div className="h-10" />
         {/* https://github.com/tailwindlabs/tailwindcss-typography?tab=readme-ov-file#element-modifiers */}
         <div
           className={twJoin(
             'post',
-            'prose prose-zinc dark:prose-invert max-w-none', // ベースのタイポグラフィスタイル
-            'text-foreground', // デフォルトのテキスト色
-            // 見出しを目立たせるために、フォントウェイトとサイズを調整
-            'prose-headings:text-foreground prose-headings:font-semibold', // 見出しの色と太さ
-            'prose-h1:text-3xl prose-h2:text-3xl prose-h2:mt-16 prose-h2:border-l-2 prose-h2:border-accent prose-h2:pl-3 prose-h3:text-2xl prose-h3:mt-12 prose-h3:border-l-2 prose-h3:border-accent-muted prose-h3:pl-3', // H1, H2, H3のサイズと上部マージン、左ボーダーを調整
-            'prose-a:text-accent hover:prose-a:text-accent-muted', // リンクの色
+            'prose prose-neutral max-w-none', // ベースのタイポグラフィスタイル
+            'text-body', // デフォルトのテキスト色
+            // 見出しはゴシックの太字（DESIGN.md: wired-light）。区切りは罫線で
+            'prose-headings:text-ink prose-headings:font-display prose-headings:font-semibold',
+            'prose-h1:text-3xl prose-h2:text-2xl prose-h2:mt-16 prose-h2:border-b prose-h2:border-hairline prose-h2:pb-2 prose-h3:text-xl prose-h3:mt-12', // H2は罫線下線、H3はプレーン
+            'prose-a:text-link hover:prose-a:text-link-active', // リンクの色
+            'prose-code:before:content-none prose-code:after:content-none', // インラインコードの装飾バッククォートを除去（面差の表現は globals.css 側）
             'prose-ul:leading-snug', // リストの行間
-            'prose-blockquote:text-muted-foreground', // 引用ブロックの色
+            'prose-blockquote:text-muted prose-blockquote:border-hairline-strong', // 引用ブロック
             'prose-img:mx-auto' // 画像を中央寄せにするためのクラスを追加
           )}
         >

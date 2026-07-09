@@ -9,7 +9,7 @@ export default async function MyappsPage() {
         {myapps.map((myapp) => (
           <li
             key={myapp.appName}
-            className="border-t border-muted first:border-0"
+            className="border-t border-hairline first:border-0"
           >
             <MyappCard {...myapp} />
           </li>

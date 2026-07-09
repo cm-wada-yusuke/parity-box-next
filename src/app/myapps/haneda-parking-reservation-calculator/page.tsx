@@ -48,10 +48,10 @@ export default function HanedaParkingReservationCalculatorPage({
   return (
     <section className="mx-auto max-w-2xl space-y-8 px-4 py-8">
       <div
-        className="border-l-4 border-yellow-600 bg-yellow-950/30 p-4 text-yellow-600"
+        className="border-l-4 border-warning bg-warning/10 p-4 text-body"
         role="alert"
       >
-        <p className="font-bold">注意</p>
+        <p className="font-bold text-ink">注意</p>
         <p>
           予約システムのルールや変更ポリシーをよく理解し、注意深く行動してください。この予約方法は予約システムの利用規約に反する可能性があるため、本データを参照したことによるトラブル等については一切責任を負えませんのでご了承ください。
         </p>
@@ -61,14 +61,14 @@ export default function HanedaParkingReservationCalculatorPage({
         <div className="flex-1">
           <label
             htmlFor="departureDate"
-            className="mb-1 block text-sm font-medium text-gray-200"
+            className="mb-1 block text-sm font-medium text-body"
           >
             出発日
           </label>
           <input
             id="departureDate"
             type="date"
-            className="w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="w-full border border-hairline bg-paper-raised p-2 text-ink focus:border-link focus:ring-link"
             value={departureDate.format('YYYY-MM-DD')}
             onChange={handleDepartureDateChange}
           />
@@ -76,14 +76,14 @@ export default function HanedaParkingReservationCalculatorPage({
         <div className="flex-1">
           <label
             htmlFor="arrivalDate"
-            className="mb-1 block text-sm font-medium text-gray-700"
+            className="mb-1 block text-sm font-medium text-body"
           >
             到着日
           </label>
           <input
             id="arrivalDate"
             type="date"
-            className="w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="w-full border border-hairline bg-paper-raised p-2 text-ink focus:border-link focus:ring-link"
             value={arrivalDate.format('YYYY-MM-DD')}
             onChange={handleArrivalDateChange}
           />
@@ -91,8 +91,8 @@ export default function HanedaParkingReservationCalculatorPage({
       </div>
 
       <div className="space-y-6">
-        <div className="rounded-lg border border-gray-200 p-4 shadow-sm">
-          <h2 className="mb-2 text-lg font-semibold text-gray-200">
+        <div className="border border-hairline p-4">
+          <h2 className="mb-2 text-lg font-medium text-ink">
             1. 最大予約日数分確保する
           </h2>
           <p className="mb-1">
@@ -112,8 +112,8 @@ export default function HanedaParkingReservationCalculatorPage({
           </p>
         </div>
 
-        <div className="rounded-lg border border-gray-200 p-4 shadow-sm">
-          <h2 className="mb-2 text-lg font-semibold text-gray-200">
+        <div className="border border-hairline p-4">
+          <h2 className="mb-2 text-lg font-medium text-ink">
             2. 終了日をあわせる（1回目の予約変更）
           </h2>
           <p className="mb-1">
@@ -139,8 +139,8 @@ export default function HanedaParkingReservationCalculatorPage({
           </p>
         </div>
 
-        <div className="rounded-lg border border-gray-200 p-4 shadow-sm">
-          <h2 className="mb-2 text-lg font-semibold text-gray-200">
+        <div className="border border-hairline p-4">
+          <h2 className="mb-2 text-lg font-medium text-ink">
             3. 実際の予約期間にする（2回目の予約変更）
           </h2>
           <p className="mb-1">
